@@ -3,7 +3,7 @@
 - [Instalação](#instalação)
 - [Parametrização](#dados)
 - [EndPoints](#endpoints)
-  - [Competições](#competicoes)  
+  - [Competições](#competições)  
   - [Resultados](#resultados)
   - [Ranking](#ranking)
     
@@ -133,7 +133,8 @@ Corpo da requisição:
 "id" : 1
 }
 ```
-Consulta realizada com sucesso: **STATUS: 200 Uruguai
+```json
+  Consulta realizada com sucesso: **STATUS: 200 Uruguai
     "atleta": "Paula",
     "Pontuação": 100.0
   },
