@@ -1,21 +1,12 @@
-# Desafio de Backend
-
-<img src="./img/logo-clubpetro.png" style="margin-left: 100px"
-     alt="Clubpetro" width="300">
+# Desafio de Backend RadarFit
 
 - [Instalação](#instalação)
+- [Parametrização](#dados)
 - [EndPoints](#endpoints)
-  - [Países](#countrys)  
-    - [Adicionar novo país](#1-adicionar-novo-país--post-apiv1countrys)
-    - [Buscar todos os países](#2-ver-todos-os-países--get-apiv1countrys)
-    - [Buscar país pelo ID](#3-buscar-um-país-pelo-id--get-apiv1countrysid)
-    - [Excluir um país](#4-excluir-um-país--delete-apiv1countrysid)
-  - [Places](#places)
-    - [Adicionar novo local](#1-adicionar-novo-local--post-apiv1places)
-    - [Ver todos os locais](#2-ver-todos-os-locais--get-apiv1places)
-    - [Buscar um local pelo ID](#3-buscar-um-local-pelo-id--get-apiv1countrysid)
-    - [Excluir um local](#4-excluir-um-local--delete-apiv1placesid)
-    - [Editar um local](#5-editar-um-local--put-apiv1placesid)
+  - [Competições](#competicoes)  
+  - [Resultados](#resultados)
+  - [Ranking](#ranking)
+    
 
 
 ## Instruções de Execução
@@ -24,310 +15,129 @@
 
 0. Requisitos:
   - git
-  - Node.js
-  - npm
+  - Python3
+  - pip3
 
 1. Clonar esse repositório:
-`$ git clone https://github.com/inovaprog/backend-challenge.git`
+`$ git clone https://github.com/inovaprog/radar-backend-challenge.git`
 
-2. Instalar as Dependências:
-`$ npm install`
+2. Entrar na pasta do projeto:
+`$ cd radar-backend-challenge/`
 
-3. Entrar na pasta do projeto:
-`$ cd backend-challenge/`
+3. Instalar as Dependências:
+`$ pip install -r requirements.txt`
 
-4. Rodar Projeto:
-`$ npm start`
+4. Criar Banco de Dados:
+`$ pyhton3 criar_db.py`
 
-**Será executado em** `localhost:3000`
-*Exemplo:* : `localhost:3000/api/v1/countrys`
+**Será executado em** `http://127.0.0.1:5000`
+
+### Dados:
+#### As unidades de medidas aceitas são:
+- Modalidade Hidratação: L e ml
+- Modalidade Perda de Peso: cal
+- Modalidade Yoga: s, m ou h
+- Modalidade Lancamento de Dardos: m
+
+Para modalidade de Lançamento de dardos deve-se cadastrar 3 resultados para cada atleta. (O maior valor será utilizado para o resultado).
+
 
 ### Endpoints:
-### Countrys:
-#### 1. Adicionar novo País:  **POST** `/api/v1/countrys` 
+### Competições:
+#### 1. Adicionar nova competição:  **POST** `/competicoes` 
 Corpo da requisição:
 ```json
 {
 "nome" : "Uruguai",
-"url_bandeira" : "https://restcountries.eu/data/ury.svg"
+"modalidade" : "lancamento de dardos"
 }
 ```
+Modalidades permitidas: ('hidratacao', 'yoga', 'perda de peso' ou 'lancamento de dardos')
 
 Cadastro com sucesso: **STATUS: 200 OK**
 ```json
 [
-  {
-    "nome": "Uruguai",
-    "url_bandeira": "https://restcountries.eu/data/ury.svg",
-    "_id": "6015bc27885d7a59783b5e30"
+    {
+    "id": 2,
+    "nome": "Campeonato Itabirano de Dardo 2",
+    "modalidade": "lancamento de dardos",
+    "em_andamento": 1
   }
 ]
 ```
 Cadastro com erro: **STATUS: 400 Bad Request**
-- País já cadastrado
+- Competição já cadastrada
 
-#### 2. Ver Todos os países:  **GET** `/api/v1/countrys` 
+#### 2. Ver Todos as competições:  **GET** `/competicoes` 
 
 
 Consulta realizada com sucesso: **STATUS: 200 OK**
 ```json
 [
-  {
-    "_id": "601594203e4a3f31ecd2af99",
-    "nome": "Brasil",
-    "url_bandeira": "url-da-bandeira-do-pais"
+    {
+    "id": 1,
+    "nome": "Campeonato Itabirano de Dardo",
+    "modalidade": "lancamento de dardos",
+    "em_andamento": 1
   },
   {
-    "_id": "601594163e4a3f31ecd2af98",
-    "nome": "China",
-    "url_bandeira": "url-da-bandeira-do-pais"
-  },
-  {
-    "_id": "6015943c3e4a3f31ecd2af9c",
-    "nome": "Japao",
-    "url_bandeira": "url-da-bandeira-do-pais"
-  },
-  {
-    "_id": "601594263e4a3f31ecd2af9a",
-    "nome": "Paraguai",
-    "url_bandeira": "url-da-bandeira-do-pais"
+    "id": 2,
+    "nome": "Campeonato Itabirano de Dardo 2",
+    "modalidade": "lancamento de dardos",
+    "em_andamento": 1
   }
 ]
 ```
-#### 3. Buscar um país pelo ID:  **GET** `/api/v1/countrys/:id` 
-
-
-Consulta realizada com sucesso: **STATUS: 200 OK**
-```javascript
-
-//api/v1/countrys/601594203e4a3f31ecd2af99
-
-[
-  {
-    "_id": "601594203e4a3f31ecd2af99",
-    "nome": "Brasil",
-    "url_bandeira": "url-da-bandeira-do-pais"
-  },
- ]
- ```
-#### 4. Excluir um país:  **DELETE** `/api/v1/countrys/:id` 
-
-
-Exclusão realizada com sucesso: **STATUS: 200 OK**
-```javascript
-{
-  "result": {
-    "n": 1,
-    "opTime": {
-      "ts": "6923646843482013697",
-      "t": 4
-    },
-    "electionId": "7fffffff0000000000000004",
-    "ok": 1,
-    "$clusterTime": {
-      "clusterTime": "6923646843482013697",
-      "signature": {
-        "hash": "loPoma41DgQZyvBjuAw9VKDgRBg=",
-        "keyId": "6918846762262200323"
-      }
-    },
-    "operationTime": "6923646843482013697"
-  },
-  "connection": {
-    "_events": {},
-    "_eventsCount": 4,
-    "id": 1,
-    "address": "35.247.244.88:27017",
-    "bson": {},
-    "socketTimeout": 0,
-    "host": "cluster0-shard-00-02.d4gur.mongodb.net",
-    "port": 27017,
-    "monitorCommands": false,
-    "closed": false,
-    "destroyed": false,
-    "lastIsMasterMS": 28
-  },
-  "deletedCount": 1,
-  "n": 1,
-  "opTime": {
-    "ts": "6923646843482013697",
-    "t": 4
-  },
-  "electionId": "7fffffff0000000000000004",
-  "ok": 1,
-  "$clusterTime": {
-    "clusterTime": "6923646843482013697",
-    "signature": {
-      "hash": "loPoma41DgQZyvBjuAw9VKDgRBg=",
-      "keyId": "6918846762262200323"
-    }
-  },
-  "operationTime": "6923646843482013697"
-}
-```
-
-
-------------
-
-
-
-
-### Places:
-#### 1. Adicionar novo Local:  **POST** `/api/v1/places` 
+#### 3. Finalizar uma Competição:  **PUT** `/competicoes` 
 Corpo da requisição:
 ```json
 {
-"country_id" : "601594203e4a3f31ecd2af99",
-"place" : "Praia de Guarapari",
-"meta" : "01/2022"
+"id" : 1
+}
+```
+Consulta realizada com sucesso: **STATUS: 200 OK**
+```javascript
+    "Competição Finalizada com Sucesso"
+ ```
+
+
+### Resultados:
+#### 1. Adicionar novo resultado:  **POST** `/resultados` 
+Corpo da requisição:
+```json
+{
+	"competicao":1,
+	"atleta": "Paula",
+	"valor": 10,
+	"unidade": "m"
 }
 ```
 
 Cadastro com sucesso: **STATUS: 200 OK**
-```json
-[
-  {
-    "country_id": "601594203e4a3f31ecd2af99",
-    "pais": "Brasil",
-    "url_bandeira": "url-da-bandeira-do-pais",
-    "place": "Praia de Guarapari",
-    "meta": "2022-01-01T00:00:00.000Z",
-    "data_criacao": "2021-01-30T20:13:35.515Z",
-    "data_edicao": "2021-01-30T20:13:35.515Z",
-    "_id": "6015bdef136d165b7eb0a1c6"
-  }
-]
-```
+
 Cadastro com erro: **STATUS: 400 Bad Request**
 
-- Local já cadastrado
+- Competição Finalizada
+- Atleta já participou da competição
+- Atleta já cadastrou 3 resultados (Lançamento de Dardos)
 
-#### 2. Ver Todos os Locais:  **GET** `/api/v1/places` 
-
-
-Consulta realizada com sucesso: **STATUS: 200 OK**
-```json
-[
-  {
-    "_id": "6015bdef136d165b7eb0a1c6",
-    "country_id": "601594203e4a3f31ecd2af99",
-    "pais": "Brasil",
-    "url_bandeira": "urldabandeira",
-    "place": "Praia de Guarapari",
-    "meta": "2022-01-01T00:00:00.000Z",
-    "data_criacao": "2021-01-30T20:13:35.515Z",
-    "data_edicao": "2021-01-30T20:13:35.515Z"
-  },
-  {
-    "_id": "6015bbaa885d7a59783b5e2d",
-    "country_id": "601594203e4a3f31ecd2af99",
-    "pais": "Brasil",
-    "url_bandeira": "urldabandeira",
-    "place": "Local no brasil",
-    "meta": "2030-12-01T00:00:00.000Z",
-    "data_criacao": "2021-01-30T20:03:54.566Z",
-    "data_edicao": "2021-01-30T20:04:19.471Z"
-  }
-]
-```
-#### 3. Buscar um local pelo ID:  **GET** `/api/v1/countrys/:id` 
-
-
-Consulta realizada com sucesso: **STATUS: 200 OK**
-```javascript
-
-//api/v1/places/6015bdef136d165b7eb0a1c6
-
-[
-  {
-    "_id": "6015bdef136d165b7eb0a1c6",
-    "country_id": "601594203e4a3f31ecd2af99",
-    "pais": "Brasil",
-    "url_bandeira": "urldabandeira",
-    "place": "Praia de Guarapari",
-    "meta": "2022-01-01T00:00:00.000Z",
-    "data_criacao": "2021-01-30T20:13:35.515Z",
-    "data_edicao": "2021-01-30T20:13:35.515Z"
-  }
-]
- ```
-#### 4. Excluir um local:  **DELETE** `/api/v1/places/:id` 
-
-
-Exclusão realizada com sucesso: **STATUS: 200 OK**
-
-```javascript
-{
-  "result": {
-    "n": 0,
-    "opTime": {
-      "ts": "6923646233596657665",
-      "t": 4
-    },
-    "electionId": "7fffffff0000000000000004",
-    "ok": 1,
-    "$clusterTime": {
-      "clusterTime": "6923646233596657665",
-      "signature": {
-        "hash": "IiZM/0Huzcu14d8FsMVrcGdKDeA=",
-        "keyId": "6918846762262200323"
-      }
-    },
-    "operationTime": "6923646233596657665"
-  },
-  "connection": {
-    "_events": {},
-    "_eventsCount": 4,
-    "id": 1,
-    "address": "35.247.244.88:27017",
-    "bson": {},
-    "socketTimeout": 0,
-    "host": "cluster0-shard-00-02.d4gur.mongodb.net",
-    "port": 27017,
-    "monitorCommands": false,
-    "closed": false,
-    "destroyed": false,
-    "lastIsMasterMS": 28
-  },
-  "deletedCount": 0,
-  "n": 0,
-  "opTime": {
-    "ts": "6923646233596657665",
-    "t": 4
-  },
-  "electionId": "7fffffff0000000000000004",
-  "ok": 1,
-  "$clusterTime": {
-    "clusterTime": "6923646233596657665",
-    "signature": {
-      "hash": "IiZM/0Huzcu14d8FsMVrcGdKDeA=",
-      "keyId": "6918846762262200323"
-    }
-  },
-  "operationTime": "6923646233596657665"
-}
-```
-#### 5. Editar um local:  **PUT** `/api/v1/places/:id`
+### Ranking:
+#### 3. Ver Resultado Parcial ou Final de uma Competição:  **POST** `/ranking` 
 Corpo da requisição:
-```javascript
+```json
 {
-"place" : "Novo Local",
-"meta" : "12/2030"
+"id" : 1
 }
 ```
-Edição realizada com sucesso: **STATUS: 200 OK**
-
+Consulta realizada com sucesso: **STATUS: 200 OK**
 ```javascript
-[
+      {
+    "atleta": "Paula",
+    "Pontuação": 100.0
+  },
   {
-    "_id": "6015bbaa885d7a59783b5e2d",
-    "country_id": "601594203e4a3f31ecd2af99",
-    "pais": "Brasil",
-    "url_bandeira": "urldabandeira",
-    "place": "Novo Local",
-    "meta": "2030-12-01T00:00:00.000Z",
-    "data_criacao": "2021-01-30T20:03:54.566Z",
-    "data_edicao": "2021-01-30T20:04:19.471Z"
+    "atleta": "Carlos",
+    "Pontuação": 50.0
   }
-]
-```
+ ```
+
