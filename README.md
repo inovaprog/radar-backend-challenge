@@ -34,12 +34,16 @@
 
 ### Dados:
 #### As unidades de medidas aceitas são:
+Todos os resultados são um JSON com Chave e Valor
+
 - Modalidade Hidratação: L e ml
 - Modalidade Perda de Peso: cal
 - Modalidade Yoga: s, m ou h
 - Modalidade Lancamento de Dardos: m
 
 Para modalidade de Lançamento de dardos deve-se cadastrar 3 resultados para cada atleta. (O maior valor será utilizado para o resultado).
+
+O Resultado da modalidade Yoga será dado hora, minutos e segundos.
 
 
 ### Endpoints:
@@ -48,7 +52,7 @@ Para modalidade de Lançamento de dardos deve-se cadastrar 3 resultados para cad
 Corpo da requisição:
 ```json
 {
-"nome" : "Uruguai",
+"nome" : "Campionato Brasileiro de Lancamento de Dardo",
 "modalidade" : "lancamento de dardos"
 }
 ```
@@ -129,9 +133,7 @@ Corpo da requisição:
 "id" : 1
 }
 ```
-Consulta realizada com sucesso: **STATUS: 200 OK**
-```javascript
-      {
+Consulta realizada com sucesso: **STATUS: 200 Uruguai
     "atleta": "Paula",
     "Pontuação": 100.0
   },
