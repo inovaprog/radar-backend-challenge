@@ -19,6 +19,8 @@ class Resultados(Resource):
         cursor.execute('SELECT * FROM competicoes WHERE id=:id_competicao',
                            {"id_competicao": id_competicao})
         competicao = cursor.fetchone()
+        if competicao == None:
+            return "Id nao corresponde a nenhuma competição", 400
         cursor.execute('SELECT * FROM resultados WHERE modalidade=:modalidade ORDER BY valor DESC',
                            {"modalidade": competicao[2]})
        

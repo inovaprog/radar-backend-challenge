@@ -74,7 +74,6 @@ class Competicoes(Resource):
         # Bpegar os dados (id da competicao)
         request = api.payload
         id_competicao = int(request['id'])
-        print(id_competicao)
         # Setar em_andamento para 0
         conn = sqlite3.connect('radar.db')
         cursor = conn.cursor()

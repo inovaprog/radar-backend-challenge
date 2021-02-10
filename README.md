@@ -48,6 +48,8 @@ Para modalidade de Lançamento de dardos deve-se cadastrar 3 resultados para cad
 
 O Resultado da modalidade Yoga será dado hora, minutos e segundos.
 
+A varival em_andamento: 0 - Competição encerrada / 1 - Competição em andamento
+
 
 ### Endpoints:
 ### Competições:
@@ -123,7 +125,7 @@ Corpo da requisição:
 Cadastro com sucesso: **STATUS: 200 OK**
 
 Cadastro com erro: **STATUS: 400 Bad Request**
-
+- Id não pertence a nenhuma competição
 - Competição Finalizada
 - Atleta já participou da competição
 - Atleta já cadastrou 3 resultados (Lançamento de Dardos)
@@ -137,7 +139,7 @@ Corpo da requisição:
 }
 ```
 ```json
-  Consulta realizada com sucesso: **STATUS: 200 Uruguai
+  Consulta realizada com sucesso: **STATUS: 200
     "atleta": "Paula",
     "Pontuação": 100.0
   },
@@ -146,4 +148,6 @@ Corpo da requisição:
     "Pontuação": 50.0
   }
  ```
+ Consulta com erro: **STATUS: 400 Bad Request**
+- Id não pertence a nenhuma competição
 

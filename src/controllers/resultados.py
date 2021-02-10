@@ -22,6 +22,8 @@ class Resultados(Resource):
         cursor.execute('SELECT * FROM competicoes WHERE id=:id',
                        {"id": id_competicao})
         resultado = cursor.fetchone()
+        if resultado == None:
+            return "Id nao corresponde a nenhuma competição", 400
         modalidade = resultado[2]
         nome_competicao = resultado[1]
 
