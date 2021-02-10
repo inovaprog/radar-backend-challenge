@@ -35,9 +35,9 @@
 
 **Será executado em** `http://127.0.0.1:5000`
 
-### Dados:
+### Observações:
 #### As unidades de medidas aceitas são:
-Todos os resultados são um JSON com Chave e Valor
+
 
 - Modalidade Hidratação: L e ml
 - Modalidade Perda de Peso: cal
@@ -50,6 +50,9 @@ O Resultado da modalidade Yoga será dado hora, minutos e segundos.
 
 A varival em_andamento: 0 - Competição encerrada / 1 - Competição em andamento
 
+Todos os resultados são um JSON com Chave e Valor
+
+Os resultados do Ranking são ordenados do Maior para o menor.
 
 ### Endpoints:
 ### Competições:
