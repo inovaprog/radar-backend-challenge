@@ -25,10 +25,13 @@
 `$ cd radar-backend-challenge/`
 
 3. Instalar as Dependências:
-`$ pip install -r requirements.txt`
+`$ pip3 install -r requirements.txt`
 
 4. Criar Banco de Dados:
-`$ pyhton3 criar_db.py`
+`$ python3 criar_db.py`
+
+4. Executar:
+`$ python3 main.py`
 
 **Será executado em** `http://127.0.0.1:5000`
 
